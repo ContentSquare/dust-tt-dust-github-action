@@ -16,7 +16,17 @@ their directories into a ZIP, and uploads it.
     workspace-id: ${{ vars.DUST_WORKSPACE_ID }}
     api-key: ${{ secrets.DUST_API_KEY }}
     region: EU
+    names: |
+      Review PR
+      Summarize
+    editors: |
+      alice@example.com
+      bob@example.com
 ```
+
+The optional `names` input selects skills by their exact `name` in `SKILL.md`. Omit it to import all detected skills.
+The optional `editors` input adds editors to each imported or updated skill. Use email addresses of active workspace members.
+Existing editors are preserved. Both inputs accept one value per line.
 
 ### `upsert-agent-configs`
 
@@ -47,6 +57,8 @@ Each YAML file must include at minimum an `agent.handle` field. See [Agent confi
 | `workspace-id`  | yes      | Dust workspace sId                                                       |
 | `api-key`       | yes      | Dust API key                                                             |
 | `region`        | yes      | Workspace region (`EU` or `US`)                                          |
+| `names`         | no       | [upsert-skills] Newline-separated skill names to import. Defaults to all skills. |
+| `editors`       | no       | [upsert-skills] Newline-separated editor email addresses to add to imported or updated skills. |
 | `agent-configs` | no       | [upsert-agent-configs] List of glob patterns for YAML agent config files |
 
 ## Common outputs
