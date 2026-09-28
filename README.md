@@ -31,11 +31,15 @@ Existing editors are preserved. Both inputs accept one value per line.
 
 The optional `availability` input sets who can see and use the imported or updated skills:
 
-| Value              | Meaning                                                         |
-|--------------------|-----------------------------------------------------------------|
-| `editors`          | Unpublished: only the skill's editors can see it.               |
-| `workspace_users`  | Published: every workspace member can see and use it.           |
-| `users_and_agents` | Published, and agents with discover skills can also pick the skill on their own.     |
+| Value              | UI label           | Meaning                                                                                                   | Required permission                                              |
+|--------------------|--------------------|-----------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| `editors`          | Editors only       | Only the skill's editors can find it in the composer and agent builder. Default for new skills.           | —                                                                |
+| `workspace_users`  | All members        | Every workspace member can find and use it.                                                               | Manage skill availability                                        |
+| `users_and_agents` | Members and agents | Every member can find it, and agents with Discover Skills enabled (including @Dust) can use it automatically. | Manage skill availability + Make skills discoverable to agents |
+
+Skills created by an API key have no editors, so with the default availability they are not discoverable by anyone.
+To make them visible, set `editors` (so those members can find and manage them) or set `availability` to
+`workspace_users` or `users_and_agents`. Admin API keys hold both permissions.
 
 ### `upsert-agent-configs`
 
